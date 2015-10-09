@@ -22,10 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/checkBox1"
         android:layout_marginTop="60dp"
-        android:enabled="true"
-        android:clickable="true"
-        android:contextClickable="true"
-        android:visibility="visible" />
+        android:enabled="false" />
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/checkBox2"
         android:layout_marginTop="90dp"
-        android:visibility="invisible" />
+        android:enabled="false" />
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,15 +40,14 @@
         android:id="@+id/checkBox4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
-        android:checked="false"
-        android:clickable="true"
-        android:visibility="gone" />
+        android:enabled="false" />
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Passo 5"
         android:id="@+id/checkBox5"
         android:layout_alignStart="@+id/checkBox1"
-        android:layout_marginTop="150dp" />
+        android:layout_marginTop="150dp"
+        android:enabled="false"/>
 
 </RelativeLayout>

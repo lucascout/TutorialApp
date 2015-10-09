@@ -1,24 +1,17 @@
 package com.lucas.tutorialapp;
 
-
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -33,12 +26,6 @@ public class MainActivity extends AppCompatActivity
      */
     private CharSequence mTitle;
 
-    CheckBox cb1;
-    CheckBox cb2;
-    CheckBox cb3;
-    CheckBox cb4;
-    CheckBox cb5;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +39,6 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        cb1 = (CheckBox) findViewById(R.id.checkBox1);
-        cb2 = (CheckBox) findViewById(R.id.checkBox2);
-        cb3 = (CheckBox) findViewById(R.id.checkBox3);
-        cb4 = (CheckBox) findViewById(R.id.checkBox4);
-        cb5 = (CheckBox) findViewById(R.id.checkBox5);
-
     }
 
     @Override
