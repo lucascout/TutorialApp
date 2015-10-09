@@ -31,6 +31,48 @@ public class menu1_Fragment extends Fragment {
         cb4 = (CheckBox) rootview.findViewById(R.id.checkBox4);
         cb5 = (CheckBox) rootview.findViewById(R.id.checkBox5);
 
+        cb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuaAcao(cb1,cb1.isChecked());
+            }
+        });
+
+        cb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuaAcao(cb2,cb2.isChecked());
+            }
+        });
+
+        cb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuaAcao(cb2,cb2.isChecked());
+            }
+        });
+
+        cb3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuaAcao(cb3,cb3.isChecked());
+            }
+        });
+
+        cb4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuaAcao(cb4,cb4.isChecked());
+            }
+        });
+
+        cb5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                efetuaAcao(cb5,cb5.isChecked());
+            }
+        });
+/*
         cb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
@@ -65,6 +107,7 @@ public class menu1_Fragment extends Fragment {
                 efetuaAcao(cb5,isChecked);
             }
         });
+        */
 
         lookupStep(rootview);
         return rootview;
@@ -81,6 +124,12 @@ public class menu1_Fragment extends Fragment {
                     newStep(rootview,0);
                     cb2.setEnabled(false);
                     cb2.setChecked(false);
+                    cb3.setEnabled(false);
+                    cb3.setChecked(false);
+                    cb4.setEnabled(false);
+                    cb4.setChecked(false);
+                    cb5.setEnabled(false);
+                    cb5.setChecked(false);
                 }
                 break;
             case R.id.checkBox2:
@@ -88,9 +137,13 @@ public class menu1_Fragment extends Fragment {
                     newStep(rootview,2);
                     cb3.setEnabled(true);
                 } else {
-                    newStep(rootview,1);
+                    newStep(rootview, 1);
                     cb3.setEnabled(false);
                     cb3.setChecked(false);
+                    cb4.setEnabled(false);
+                    cb4.setChecked(false);
+                    cb5.setEnabled(false);
+                    cb5.setChecked(false);
                 }
                 break;
             case R.id.checkBox3:
@@ -98,9 +151,11 @@ public class menu1_Fragment extends Fragment {
                     newStep(rootview,3);
                     cb4.setEnabled(true);
                 } else {
-                    newStep(rootview,2);
+                    newStep(rootview, 2);
                     cb4.setEnabled(false);
                     cb4.setChecked(false);
+                    cb5.setEnabled(false);
+                    cb5.setChecked(false);
                 }
                 break;
             case R.id.checkBox4:
@@ -125,14 +180,13 @@ public class menu1_Fragment extends Fragment {
     }
 
     public void newStep (View view, Integer num) {
+        removeProduct(view);
         MyDBHandler dbHandler = new MyDBHandler(rootview.getContext(), null, null, 1);
 
         int step = num;
 
-        tutoSteps tuto =
-                new tutoSteps("menu1", step);
+        tutoSteps tuto = new tutoSteps("menu1", step);
 
-        Toast.makeText(rootview.getContext(), String.valueOf(step), Toast.LENGTH_SHORT).show();
         dbHandler.addStep(tuto);
     }
 
@@ -148,33 +202,58 @@ public class menu1_Fragment extends Fragment {
                     break;
                 case 1:
                     cb1.setChecked(true);
+                    cb1.setEnabled(true);
+                    cb2.setEnabled(true);
                     break;
                 case 2:
                     cb1.setChecked(true);
+                    cb1.setEnabled(true);
                     cb2.setChecked(true);
+                    cb2.setEnabled(true);
+                    cb3.setEnabled(true);
                     break;
                 case 3:
                     cb1.setChecked(true);
+                    cb1.setEnabled(true);
                     cb2.setChecked(true);
+                    cb2.setEnabled(true);
                     cb3.setChecked(true);
+                    cb3.setEnabled(true);
+                    cb4.setEnabled(true);
                     break;
                 case 4:
                     cb1.setChecked(true);
+                    cb1.setEnabled(true);
                     cb2.setChecked(true);
+                    cb2.setEnabled(true);
                     cb3.setChecked(true);
+                    cb3.setEnabled(true);
                     cb4.setChecked(true);
+                    cb4.setEnabled(true);
+                    cb5.setEnabled(true);
                     break;
                 case 5:
                     cb1.setChecked(true);
+                    cb1.setEnabled(true);
                     cb2.setChecked(true);
+                    cb2.setEnabled(true);
                     cb3.setChecked(true);
+                    cb3.setEnabled(true);
                     cb4.setChecked(true);
+                    cb4.setEnabled(true);
                     cb5.setChecked(true);
+                    cb5.setEnabled(true);
                     break;
             }
         } else {
             Toast.makeText(rootview.getContext(), "Não há tutorial em andamento.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void removeProduct (View view) {
+        MyDBHandler dbHandler = new MyDBHandler(rootview.getContext(), null,null, 1);
+
+        dbHandler.deleteProduct("menu1");
     }
 
 }

@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.view.View;
+import android.widget.Toast;
 
 /**
  * Created by Lucas on 09/10/2015.
@@ -25,11 +27,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
+        String CREATE_STEPS_TABLE = "CREATE TABLE " +
                 TABLE_TUTOSTEPS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_LAYOUT
-                + " TEXT," + COLUMN_STEP + " INTEGER" + ")";
-        db.execSQL(CREATE_PRODUCTS_TABLE);
+                + " TEXT UNIQUE," + COLUMN_STEP + " INTEGER" + ")";
+        db.execSQL(CREATE_STEPS_TABLE);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     }
 
     public tutoSteps findProduct(String layout) {
-        String query = "Select * FROM " + TABLE_TUTOSTEPS + " WHERE " + COLUMN_LAYOUT + " =  \"" + layout + "\"";
+        String query = "Select * FROM " + TABLE_TUTOSTEPS + " WHERE " + COLUMN_LAYOUT + " =  \"" + layout + "\" order by 3 desc";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -73,4 +75,22 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return step;
     }
 
+    public boolean deleteProduct(String layout) {
+        boolean result = false;
+        String query = "Select * FROM " + TABLE_TUTOSTEPS + " WHERE " + COLUMN_LAYOUT + " =  \"" + layout + "\"";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        tutoSteps product = new tutoSteps();
+
+        if (cursor.moveToFirst()) {
+            product.setID(Integer.parseInt(cursor.getString(0)));
+            db.delete(TABLE_TUTOSTEPS, COLUMN_ID + " = ?",
+                    new String[] { String.valueOf(product.getID()) });
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
+    }
 }
